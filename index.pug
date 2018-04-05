@@ -3,11 +3,12 @@ html
   head
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
-    title
+    title kubernetes deployment  ～ホントにこれでええの～
     link(rel='stylesheet', href='css/reveal.min.css')
     link(rel='stylesheet', href='css/theme/white.css')
     link(rel='stylesheet', href='lib/css/zenburn.css')
     link(rel='stylesheet', href='css/font-awesome.min.css')
+    link(rel='stylesheet', href='css/my.css')
     script.
       var link = document.createElement( 'link' );
       link.rel = 'stylesheet';
@@ -19,6 +20,197 @@ html
     .reveal
       .slides
         section
+          h1 kubernetes deployment
+          h2 ～ホントにこれでええの～
+          p 2018-04-05
+          p 表参道.rb #33 ~Deploy~
+          p うなすけ
+        section
+          h2 自己紹介
+          .flex-container
+            .item-40
+              img(src='img/icon_raw.jpg' alt='icon')
+            .item-60
+              ul
+                li 名前: うなすけ
+                li 株式会社バンク
+                ul
+                  li: a(href='https://bank.co.jp') https://bank.co.jp
+                li エンジニア
+                br
+                li
+                  | twitter&nbsp;
+                  i.fa.fa-twitter
+                  | :&nbsp;
+                  a(href='https://twitter.com/yu_suke1994') @yu_suke1994
+                li
+                  | GitHub&nbsp;
+                  i.fa.fa-github
+                  | :&nbsp;
+                  a(href='https://github.com/unasuke') @unasuke
+        section(data-background-color="#ffcf07")
+          img(src='https://cash.jp/media_kit/cash_key_01.png')
+        section
+          h2 CASH on Rails!
+        section
+          h2 kubernetes deployment
+          br
+          small 今後k8sと書きます
+        section
+          h2 まえおき
+          ol
+            li 転職が2月頭です
+            li 転職してからGCPとk8sを触りはじめました
+        section
+          h2 つまりどういうことか
+          p.bold 「それ○○でできるよ？」
+          p になる可能性大
+        section
+          p 本題に入ります
+        section
+          h2 k8s deployment
+        section
+          h2 k8s deployment
+          p みなさんdeployしてますか？
+          .fragment
+            ul
+              li FTP, rsync
+              li Capistrano
+              li ecs-cli
+              li k8s
+              li etc
+        section
+          h2 k8s deployment
+          p 世は大コンテナ時代
+          .logos
+            .logo
+              img(src='https://www.docker.com/sites/default/files/vertical.png')
+            .logo
+              img(src='img/ecs.svg' width='300px')
+            .logo
+              img(src='img/gke.svg')
+        section
+          h2 k8s deployment
+          h3 世は大コンテナ時代
+          p コンテナをdeployするにはどうすればいいのか？
+          br
+          small Docker Swarm……
+        section
+          img.no-deco(src='https://github.com/kubernetes/kubernetes/raw/master/logo/logo.png' width='70%')
+        section
+          h2 k8s deployment
+          ruby
+            | de facto standard of container orchestration tool
+            rt なんかいろいろすごいのでみんなつかってる
+        section
+          h2 k8s deployment
+          h3 hands on
+          img.no-deco(src='img/k8s-deployment-yaml.png' width='80%')
+        section
+          h2 k8s deployment
+          h3 hands on
+          img.no-deco(src='img/k8s-service-yaml.png' width='80%')
+        section
+          h2 k8s deployment
+          h3 hands on
+          img.no-deco(src='img/kubectl-commands.png' width='80%')
+          p これでなんかうごく
+        section
+          h2 k8s deployment
+          h3 さて弊社
+        section
+          h2 k8s deployment
+          h3 さて弊社
+          img.no-deco(src='img/cash-deploy-script.png' width='80%')
+        section
+          h2 k8s deployment
+          h3 さて弊社
+          h4 $ bin/deploy production
+          p.bold 謎のmd5値が更新される
+          img(src='img/update-md5-checksum.png')
+        section
+          h2 k8s deployment
+          h3 さて弊社
+          h4 謎md5の理由
+          p 先輩「それがないとdeployできなくなるんだよ」
+          br
+          small スーパー要約
+        section
+          h2 k8s deployment
+          h3 弊社でのk8s deployの裏側
+          ul
+            li Yamlに変更がないとき
+              ul
+                li kubectl set image
+            li Yamlに変更があるとき
+              ul
+                li kubectl apply
+          p
+            | Yamlのmd5を見て判断している
+        section
+          h2 k8s deployment
+          h3 弊社でのk8s deploy
+          h4 何がつらい？
+          ul
+            li md5の更新をgit commitする必要がある
+              ul
+                li chat deployができない
+                  ul
+                    li CI serviceがgit commitするとか正気か？
+                      ul
+                        li いやワンチャン……？
+        section
+          h4 CI serviceがgit commitするとか正気か？
+        section
+          h2 CI serviceがgit commit
+          p 今日、PullReqを眺めていると……
+          img(src='img/fastlane-bitrise-bot.png')
+        section
+          h2 CI serviceがgit commit
+          p 意見
+          img(src='img/commit-with-bot.png')
+          br
+          small ※ ここで会場の意見を聞く
+        section
+          h2 k8s deployment
+          h3 弊社でのk8s deploy
+          h4 他にも
+          ul
+            li deploy通知どうする
+            li Podが入れ替わったかの監視
+        section
+          h2 k8s deployment
+          h3 弊社でのk8s deploy
+          h4 みなさんはどうですか？
+          small ※ スライドは続くので後で聞く
+        section
+          h2 k8s deployment
+          h3 k8s deploy tool
+          h4 Shopify/kubernetes-deploy
+          ul
+            li よさそう
+            li UIがリッチ
+            li rubygemなのはちょっといただけない
+          br
+          br
+          small
+            a(href='https://github.com/Shopify/kubernetes-deploy') https://github.com/Shopify/kubernetes-deploy
+        section
+          h2 k8s deployment
+          h3 新生 k8s deploy tool
+          a(href="https://github.com/GoogleCloudPlatform/skaffold") https://github.com/GoogleCloudPlatform/skaffold
+          blockquote
+            | Skaffold is a command line tool that facilitates continuous development for Kubernetes applications.
+          br
+          small 最近登場したばかりでまだ触れていない
+        section(data-markdown)
+          script(type='text/template')
+            | ## 参考
+            | - [Google Cloud Platform Japan 公式ブログ: Google から世界へ : Kubernetes 誕生の物語](https://cloudplatform-jp.googleblog.com/2016/08/google-kubernetes.html)
+            | - [Deployments | Kubernetes](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+            | - [Google、開発者のためのKubernetes用コマンドラインツール「Skaffold」オープンソースで公開。開発環境にもKubernetes、ローカルのMinikubeにも対応 － Publickey](http://www.publickey1.jp/blog/18/googlekubernetesskaffoldkubernetesminikube.html)
+            | - [Kubernetesクラスタのデプロイツールまとめ - Qiita](https://qiita.com/mumoshu/items/72ae0f07a58a37626204)
+
     script(src='lib/js/head.min.js')
     script(src='js/reveal.min.js')
     script.
